@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({	extended: true	}));
 app.use(bodyParser.json());
 
-var timout = 0.15;	//in minutes
+var timout = 5;	//in minutes
 var defaultMsg = 'No Results Found !!';
 
 app.route('/')
