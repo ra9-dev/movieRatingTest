@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>COMPARE RATING APP</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	
+</head>
+<body>
+	<div class="form-inline">
+		<div class="form-group">
+			<label for="moviename">Movie Name</label>
+			<input type="text" id="moviename" placeholder="Type Any Movie Name">
+		</div>
+		<button type="button" class="btn btn-default" name="Submit" id="submit">Click Me !!</button>
+	</div>
+
+	<div id="rating">
+		<label for='omdbRating'>IMDB RATING (Powered by OMDB API)</label>
+		<p id='omdbRating'></p>
+		<label for='tmdbRating'>TMDB RATING</label>
+		<p id='tmdbRating'></p>
+	</div>
+
+	<p id="err"></p>
+
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#rating').hide();
+			$("#submit").click(function() {
+				resetValues();
+				$.ajax({
+					url: 'http://localhost:3000',
+					method: 'POST',
+					async: true,
+					timeout: 6*60*1000,
+					data: {
+						moviename: $('#moviename').val()
+					},
+					success: function(result) {
+						$('#omdbRating').text(result.omdb);
+						$('#tmdbRating').text(result.tmdb);
+						$('#rating').show();
+					},
+					error: function(xmlhttprequest, textstatus, message) {
+						if(textstatus=='timeout')
+							$('#err').text('Request Timed Out');
+					},
+					complete: function() {
+						$('#submit').attr('disabled', false);
+						$('#submit').text('Click Me !!');
+					}
+				});
+			});
+
+			function resetValues() {
+				$('#rating').hide();
+				$('#omdbRating').text('');
+				$('#tmdbRating').text('');
+				$('#submit').attr('disabled', true);
+				$('#err').text('');
+				$('#submit').text('WAIT !!');
+			}
+		});
+	</script>
+
+</body>
+</html>
