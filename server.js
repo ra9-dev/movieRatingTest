@@ -27,14 +27,13 @@ app.route('/')
 	else {
 		const omdbResult = omdb(moviename);
 		const tmdbResult = tmdb(moviename);
-		// await Task.WhenAll(omdbResult, tmdbResult);
 		var omdbData = await omdbResult;
 		var tmdbData = await tmdbResult;
 		console.log('--------------------');
 		console.log(omdbResult);
 		console.log(tmdbData);
 	}
-	await setTimeout(function() {
+	setTimeout(function() {
 		res.json({
 			omdb: omdbData,
 			tmdb: tmdbData,
