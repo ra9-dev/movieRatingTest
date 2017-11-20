@@ -9,3 +9,5 @@
 	npm install
 	npm run start
 #### Open index.html file in browser
+
+### If you want to decrease the timeout of 5 minutes, change it in the config.js file
