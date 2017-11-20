@@ -7,4 +7,5 @@
 	nodejs ^8
 ### Clone the directory and run the following command in root path of project directory.
 	npm install
+	npm run start
 #### Open index.html file in browser
