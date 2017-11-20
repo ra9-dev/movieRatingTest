@@ -25,10 +25,16 @@ app.route('/')
 		var tmdbData = defaultMsg;
 	}
 	else {
-		var omdbData = await omdb(moviename);
-		var tmdbData = await tmdb(moviename);
+		const omdbResult = omdb(moviename);
+		const tmdbResult = tmdb(moviename);
+		// await Task.WhenAll(omdbResult, tmdbResult);
+		var omdbData = await omdbResult;
+		var tmdbData = await tmdbResult;
+		console.log('--------------------');
+		console.log(omdbResult);
+		console.log(tmdbData);
 	}
-	setTimeout(function() {
+	await setTimeout(function() {
 		res.json({
 			omdb: omdbData,
 			tmdb: tmdbData,
