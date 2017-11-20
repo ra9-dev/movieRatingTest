@@ -4,13 +4,15 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	cors = require('cors'),
 	axios = require('axios'),
+	config = require('./config'),
 	port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({	extended: true	}));
 app.use(bodyParser.json());
 
-var timout = 5;	//in minutes
+var timout = config.timeout;
+console.log(timout);
 var defaultMsg = 'No Results Found !!';
 
 app.route('/')
